@@ -6,7 +6,6 @@ import {
     reducer, 
     reducerInitState,
 } from 'models/tic-tac-toe';
-
 import { Provider } from 'libs/model';
 
 import './app.css';
@@ -28,3 +27,4 @@ function App() {
   }
 
 export default App;
+//i just  modified it
