@@ -60,9 +60,9 @@ export const Game = ({ winner, xIsNext, history, jumpTo }) => {
 // )(Game);
 const mapStateToProps = (state) => {
     return {
-        winner,
-        history,
-        xIsNext,
+        winner: state.winner,
+        history: state.history,
+        xIiNext: state.xIsNext,
     }
 }
 
