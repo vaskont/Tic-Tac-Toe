@@ -1,10 +1,13 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
 import React from 'react';
 
+import { connect } from 'react-redux';
+
 import { Board } from 'components/board';
 
-import { withProps } from 'libs/model/withProps';
+// import { withProps } from 'libs/model/withProps';
 
 import {
     winner,
@@ -45,13 +48,28 @@ export const Game = ({ winner, xIsNext, history, jumpTo }) => {
     );
 };
 
-export default withProps(
-    {
+// export default withProps(
+//     {
+//         winner,
+//         history,
+//         xIsNext,
+//     },
+//     {
+//         jumpTo: dispatch => step => dispatch( jumpTo({ step }) ),
+//     },
+// )(Game);
+const mapStateToProps = (state) => {
+    return {
         winner,
         history,
         xIsNext,
-    },
-    {
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
         jumpTo: dispatch => step => dispatch( jumpTo({ step }) ),
-    },
-)(Game);
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
