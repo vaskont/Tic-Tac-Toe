@@ -1,12 +1,15 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react'
 
-import { withProps } from 'libs/model';
+//import { withProps } from 'libs/model';
 
 import {
     square,
     play,
 } from 'models/tic-tac-toe';
+
+import { connect } from 'react-redux';
 
 import './square.css';
 
@@ -18,11 +21,25 @@ export const Square = ({ index, value, play }) => {
     );
 }
 
-export default withProps(
-    {
-        value: (state, props) => square(state)(props.index),
-    },
-    {
-        play: dispatch => i => dispatch(play({ i })),
-    },
-)(Square);
+// export default withProps(
+//     {
+//         value: (state, props) => square(state)(props.index),
+//     },
+//     {
+//         play: dispatch => i => dispatch(play({ i })),
+//     },
+// )(Square);
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        value: square(state)(ownProps.index)
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        play: i => dispatch(play({ i })),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Square);

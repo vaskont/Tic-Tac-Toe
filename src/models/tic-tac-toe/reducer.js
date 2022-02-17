@@ -50,6 +50,8 @@ function reducer(state = reducerInitState, action) {
                 stepNumber: action.payload.step,
                 xIsNext: (action.payload.step % 2) === 0,
             };
+        default:
+            return state;
     }
 }
 

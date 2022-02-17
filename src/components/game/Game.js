@@ -68,7 +68,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        jumpTo: dispatch => step => dispatch( jumpTo({ step }) ),
+        jumpTo: step => dispatch( jumpTo({ step }) ),
     };
 };
 

@@ -1,4 +1,7 @@
-import { applyMiddleware, createStore } from 'redux';
+import { 
+  applyMiddleware,
+  createStore,
+} from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { 
@@ -19,4 +22,5 @@ function configureStore(preloadedState) {
 }
 
 const store = configureStore(reducerInitState);
+console.log('Created store 1: ', store.getState());
 export default store;

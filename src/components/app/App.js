@@ -11,9 +11,7 @@ import './app.css';
 function App() {
 
     return (
-        <Provider
-            store={store}
-        >
+        <Provider store={store}>
             <Game />
         </Provider>
     );
