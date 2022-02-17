@@ -1,30 +1,17 @@
-import React/*, { useReducer }*/ from 'react';
-import { createStore } from 'redux';
+import React from 'react';
 
 import { Game } from 'components/game';
 
-import { 
-    reducer, 
-    /*reducerInitState,*/
-} from 'models/tic-tac-toe';
-
 import { Provider } from 'react-redux';
-//import { Provider } from 'libs/model';
+
+import store from 'redux/store';
 
 import './app.css';
 
 function App() {
 
-    //const [state, dispatch] = useReducer(reducer, reducerInitState);
-
-    const store = createStore(reducer);
-
     return (
-        <Provider 
-            // value={{
-            //     state,
-            //     dispatch,
-            // }}
+        <Provider
             store={store}
         >
             <Game />

@@ -60,16 +60,16 @@ export const Game = ({ winner, xIsNext, history, jumpTo }) => {
 // )(Game);
 const mapStateToProps = (state) => {
     return {
-        winner: state.winner,
-        history: state.history,
-        xIiNext: state.xIsNext,
-    }
-}
+        winner: winner(state),
+        history: history(state),
+        xIsNext : xIsNext(state),
+    };
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
         jumpTo: dispatch => step => dispatch( jumpTo({ step }) ),
-    }
-}
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
