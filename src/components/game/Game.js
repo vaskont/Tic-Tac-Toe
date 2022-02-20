@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 
 import { Board } from 'components/board';
 
+import { createSelector } from 'reselect'
+
 // import { withProps } from 'libs/model/withProps';
 
 import {
@@ -58,13 +60,21 @@ export const Game = ({ winner, xIsNext, history, jumpTo }) => {
 //         jumpTo: dispatch => step => dispatch( jumpTo({ step }) ),
 //     },
 // )(Game);
-const mapStateToProps = (state) => {
-    return {
-        winner: winner(state),
-        history: history(state),
-        xIsNext : xIsNext(state),
-    };
-};
+
+
+// const mapStateToProps = (state) => {
+//     return {
+//         winner: winner(state),
+//         history: history(state),
+//         xIsNext : xIsNext(state),
+//     };
+// };
+
+const mapStateToProps = createSelector(winner, history, xIsNext, (winner, history, xIsNext) => ({
+    winner,
+    history,
+    xIsNext
+}));
 
 const mapDispatchToProps = (dispatch) => {
     return {
