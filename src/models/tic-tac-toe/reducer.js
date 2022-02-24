@@ -47,8 +47,8 @@ function reducer(state = reducerInitState, action) {
         case jumpTo.type:
             return {
                 ...state,
-                stepNumber: action.payload.step,
-                xIsNext: (action.payload.step % 2) === 0,
+                stepNumber: action.payload.move,
+                xIsNext: (action.payload.move % 2) === 0,
             };
         default:
             return state;

@@ -4,6 +4,8 @@ import React from 'react'
 
 //import { withProps } from 'libs/model';
 
+import { createSelector } from 'reselect';
+
 import {
     square,
     play,
@@ -36,7 +38,11 @@ const mapStateToProps = (state, ownProps) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
+// const mapStateToProps = createSelector(square, (value) => ({
+//     value,
+// }));
+
+const mapDispatchToProps = dispatch => {
     return {
         play: i => dispatch(play({ i })),
     };
