@@ -28,7 +28,7 @@ export const Game = ({ winner, xIsNext, history, jumpTo }) => {
             'Go to game start';
         return (
             <li key={move}>
-                <button onClick= {() => jumpTo(move)}>{desc}</button>
+                <button onClick= {() => jumpTo({move})}>{desc}</button>
             </li>
         );
     })
@@ -76,10 +76,10 @@ const mapStateToProps = (state) => createSelector(winner, history, xIsNext, (win
     xIsNext
 }));
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        jumpTo: () => dispatch( jumpTo(ownProps.move) ),
+        jumpTo: (move) => dispatch( jumpTo({move}) ),
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default connect(mapStateToProps, { jumpTo })(Game);

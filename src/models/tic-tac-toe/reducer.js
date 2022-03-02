@@ -15,11 +15,11 @@ const reducerInitState = {
     winner: false, 
 };
 
-function reducer(state = reducerInitState, action) {
+function reducer(state = reducerInitState, {type, payload}) {
         
-    switch (action.type) {
+    switch (type) {
         case play.type: {
-            const { i } = action.payload;
+            const { i } = payload;
             const history = state.history.slice(0, state.stepNumber + 1);
             const current = history[history.length - 1];
             const squares = current.squares.slice();
@@ -45,10 +45,11 @@ function reducer(state = reducerInitState, action) {
             };
         }
         case jumpTo.type:
+            console.log('in jump to: ', payload);
             return {
                 ...state,
-                stepNumber: action.payload.move,
-                xIsNext: (action.payload.move % 2) === 0,
+                stepNumber: payload.move,
+                xIsNext: (payload.move % 2) === 0,
             };
         default:
             return state;
