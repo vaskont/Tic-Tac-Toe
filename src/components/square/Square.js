@@ -16,6 +16,7 @@ import { connect } from 'react-redux';
 import './square.css';
 
 export const Square = ({ index, value, play }) => {
+    console.log('im square ' + index)
     return (
         <button className="square" onClick={() => play({i: index})}>
             {value}

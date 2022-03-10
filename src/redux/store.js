@@ -19,5 +19,4 @@ function configureStore(preloadedState) {
 }
 
 const store = configureStore(reducerInitState);
-console.log('Created store 1: ', store.getState());
 export default store;

@@ -24,6 +24,8 @@ import './game.css';
 
 export const Game = ({ winner, xIsNext, history, name, jumpTo }) => {
 
+    console.log(history);
+
     const moves = history.map((step, move) => {
         const desc = move ? 
             'Go to move #' + move :
