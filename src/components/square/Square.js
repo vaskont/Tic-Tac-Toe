@@ -17,7 +17,7 @@ import './square.css';
 
 export const Square = ({ index, value, play }) => {
     return (
-        <button className="square" onClick={() => play(index)}>
+        <button className="square" onClick={() => play({i: index})}>
             {value}
         </button>
     );
@@ -28,7 +28,7 @@ export const Square = ({ index, value, play }) => {
 //         value: (state, props) => square(state)(props.index),
 //     },
 //     {
-//         play: dispatch => i => dispatch(play({ i })),
+//         play,
 //     },
 // )(Square);
 

@@ -5,4 +5,6 @@ export {
 
 export { Action } from './Action';
 
-export { withProps } from './withProps';
+// export { withProps } from './withProps';
+
+export { withProps } from './withPropsRedux';

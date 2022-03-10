@@ -20,7 +20,7 @@ export const withProps = (selectors, actions) => Component => props => {
     const actionProps = Object.entries(actions).reduce(
         (actionProps, [propName, actionCreator]) => ({
             ...actionProps,
-            [propName]: actionCreator(dispatch, props),
+            [propName]: payload => dispatch(actionCreator(payload, props)),
         }),
         {},
     );

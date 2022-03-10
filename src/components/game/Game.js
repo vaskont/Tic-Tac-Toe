@@ -7,20 +7,22 @@ import { connect } from 'react-redux';
 
 import { Board } from 'components/board';
 
-import { createSelector } from 'reselect';
+import { createStructuredSelector } from 'reselect';
 
-// import { withProps } from 'libs/model/withProps';
+import { withProps } from 'libs/model';
 
 import {
     winner,
     history,
     xIsNext,
+    name,
     jumpTo,
+    changeName,
 } from 'models/tic-tac-toe';
 
 import './game.css';
 
-export const Game = ({ winner, xIsNext, history, jumpTo }) => {
+export const Game = ({ winner, xIsNext, history, name, jumpTo }) => {
 
     const moves = history.map((step, move) => {
         const desc = move ? 
@@ -36,6 +38,13 @@ export const Game = ({ winner, xIsNext, history, jumpTo }) => {
     const status = winner
         ? 'Winner: ' + winner
         : 'Next player: ' + (xIsNext ? 'X' : 'O');
+    
+    
+    // const login = name
+    //     ? 'Hello, ' + name + <input name='name'/> + <button >Change Name</button>
+    //     : <label>Please enter your name: 
+    //         <input name='name' id='name'/>
+    //         </label>
 
     return (
         <div className="game">
@@ -50,6 +59,15 @@ export const Game = ({ winner, xIsNext, history, jumpTo }) => {
     );
 };
 
+export default withProps({
+    winner,
+    history,
+    xIsNext,
+    name,
+    },
+    { jumpTo },
+)(Game);
+
 // export default withProps(
 //     {
 //         winner,
@@ -57,7 +75,7 @@ export const Game = ({ winner, xIsNext, history, jumpTo }) => {
 //         xIsNext,
 //     },
 //     {
-//         jumpTo: dispatch => step => dispatch( jumpTo({ step }) ),
+//         jumpTo,
 //     },
 // )(Game);
 
@@ -70,16 +88,19 @@ export const Game = ({ winner, xIsNext, history, jumpTo }) => {
 //     };
 // };
 
-const mapStateToProps = (state) => createSelector(winner, history, xIsNext, (winner, history, xIsNext) => ({
-    winner,
-    history,
-    xIsNext
-}));
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         jumpTo: (move) => dispatch( jumpTo({move}) ),
+//     };
+// };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        jumpTo: (move) => dispatch( jumpTo({move}) ),
-    };
-};
+// export default connect(mapStateToProps, { jumpTo })(Game);
 
-export default connect(mapStateToProps, { jumpTo })(Game);
+// export default connect( 
+//     createStructuredSelector({
+//         winner,
+//         history,
+//         xIsNext,
+//     }),
+//     { jumpTo },
+// )(Game);

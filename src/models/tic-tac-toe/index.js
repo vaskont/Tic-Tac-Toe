@@ -1,7 +1,6 @@
-export { 
-    reducer,
-    reducerInitState, 
-} from './reducer';
+import { reducerInitState } from './reducers/game';
+import reducer from './reducers/index';
+export { reducer, reducerInitState };
 
 export {
     winner,
@@ -9,9 +8,11 @@ export {
     squares,
     history,
     square,
+    name,
 } from './selectors';
 
 export { 
     play,
-    jumpTo, 
+    jumpTo,
+    changeName,
 } from './actions';
