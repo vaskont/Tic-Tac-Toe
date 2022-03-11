@@ -16,13 +16,26 @@ import { connect } from 'react-redux';
 import './square.css';
 
 export const Square = ({ index, value, play }) => {
-    console.log('im square ' + index)
     return (
         <button className="square" onClick={() => play({i: index})}>
             {value}
         </button>
     );
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        value: square(state)(ownProps.index)
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        play: i => dispatch(play({ i })),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Square);
 
 // export default withProps(
 //     {
@@ -33,20 +46,6 @@ export const Square = ({ index, value, play }) => {
 //     },
 // )(Square);
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        value: square(state)(ownProps.index)
-    };
-};
-
 // const mapStateToProps = createSelector(square, (value) => ({
 //     value,
 // }));
-
-const mapDispatchToProps = dispatch => {
-    return {
-        play: i => dispatch(play({ i })),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Square);

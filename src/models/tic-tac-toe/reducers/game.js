@@ -13,7 +13,6 @@ const reducerInitState = {
     stepNumber: 0,
     xIsNext: true,
     winner: false,
-    name: '', 
 };
 
 function game(state = reducerInitState, {type, payload}) {
@@ -32,7 +31,7 @@ function game(state = reducerInitState, {type, payload}) {
                     winner,
                 };
             }
-
+            
             squares[i] = state.xIsNext ? 'X' : 'O';
 
             return {

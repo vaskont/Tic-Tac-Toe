@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { 
   applyMiddleware,
   createStore,
@@ -18,5 +19,7 @@ function configureStore(preloadedState) {
   return store
 }
 
-const store = configureStore(reducerInitState);
+// const store = configureStore(reducerInitState);
+const store = createStore(reducer);
+console.log('Store created!', store.getState());
 export default store;
