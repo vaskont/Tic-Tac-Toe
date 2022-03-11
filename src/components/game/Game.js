@@ -22,12 +22,7 @@ import {
 
 import './game.css';
 
-export const Game = ({ winner, xIsNext, history, name, jumpTo }) => {
-
-    console.log('winner ', winner);
-    console.log('xIsNext ', xIsNext);
-    console.log('history ', history);
-    console.log('name ', name);
+export const Game = ({ winner, xIsNext, history, name, jumpTo, changeName }) => {
     
     const moves = history.map((step, move) => {
         const desc = move ? 
@@ -44,12 +39,24 @@ export const Game = ({ winner, xIsNext, history, name, jumpTo }) => {
         ? 'Winner: ' + winner
         : 'Next player: ' + (xIsNext ? 'X' : 'O');
     
+    function myfunc(e){
+        e.preventDefault();
+        console.log(e.target.value);
+    }
+
+    // ({event: {target: { value }}}) => changeName({value})
+
+    const login = name
+        ? <div className='login'>
+            <span>Hello, {name}</span>
+            <input type='text' name='name' size='15' onSubmit={myfunc}/>
+            <button >Change name</button>
+        </div>
+        : <label>Please enter your name: 
+            <input name='name' id='name'/>
+        </label>;
     
-    // const login = name
-    //     ? 'Hello, ' + name + <input name='name'/> + <button >Change Name</button>
-    //     : <label>Please enter your name: 
-    //         <input name='name' id='name'/>
-    //         </label>
+    console.log('The nameTemp is: ' + name)
 
     return (
         <div className="game">
@@ -59,6 +66,9 @@ export const Game = ({ winner, xIsNext, history, name, jumpTo }) => {
             <div className="game-info">
                 <div>{status}</div>
                 <ol>{moves}</ol>
+            </div>
+            <div>
+                {login}
             </div>
         </div>
     );
@@ -70,7 +80,10 @@ export default withProps({
     xIsNext,
     name,
     },
-    { jumpTo },
+    { 
+        jumpTo,
+        changeName,
+    },
 )(Game);
 
 // export default withProps(

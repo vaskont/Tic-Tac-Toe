@@ -1,7 +1,7 @@
 import { changeName } from '../actions';
 
 const reducerInitState = {
-    name: '', 
+    name: 'vassilis', 
 };
 
 function login(state = reducerInitState, {type, payload}) {
