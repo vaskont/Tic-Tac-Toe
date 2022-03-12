@@ -1,17 +1,16 @@
 import { changeName } from '../actions';
 
 const reducerInitState = {
-    name: 'vassilis', 
+    name: '', 
 };
 
 function login(state = reducerInitState, {type, payload}) {
         
     switch (type) {
         case changeName.type: {
-
             return {
                 ...state,
-                name: payload.name,
+                name: payload.tempName,
             };
         }
         default:

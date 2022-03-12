@@ -38,25 +38,33 @@ export const Game = ({ winner, xIsNext, history, name, jumpTo, changeName }) => 
     const status = winner
         ? 'Winner: ' + winner
         : 'Next player: ' + (xIsNext ? 'X' : 'O');
-    
-    function myfunc(e){
-        e.preventDefault();
-        console.log(e.target.value);
+
+    let tempName = '';
+    let target = '';
+
+    function myfunc(t){
+        tempName = t.value;
+        target = t;
     }
 
-    // ({event: {target: { value }}}) => changeName({value})
+    function submitF(){
+        target.value = '';
+        changeName({tempName});
+    }
 
     const login = name
         ? <div className='login'>
             <span>Hello, {name}</span>
-            <input type='text' name='name' size='15' onSubmit={myfunc}/>
-            <button >Change name</button>
+            <input type='text' name='name' size='15' onChange={({ target }) => myfunc(target)}/>
+            <button onClick={submitF} >Change name</button>
         </div>
-        : <label>Please enter your name: 
-            <input name='name' id='name'/>
-        </label>;
+        : <div className='login'>
+            <label>Please enter your name: 
+                <input name='name' id='name' onChange={({ target }) => myfunc(target)}/>
+                <input type='submit' name='button' onClick={submitF} />
+            </label>
+        </div>
     
-    console.log('The nameTemp is: ' + name)
 
     return (
         <div className="game">

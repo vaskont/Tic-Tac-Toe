@@ -44,13 +44,13 @@ function game(state = reducerInitState, {type, payload}) {
                 xIsNext: !state.xIsNext,
             };
         }
-        case jumpTo.type:
-            console.log('in jump to: ', payload);
+        case jumpTo.type: {
             return {
                 ...state,
                 stepNumber: payload.move,
                 xIsNext: (payload.move % 2) === 0,
             };
+        }
         default:
             return state;
     }
