@@ -15,7 +15,7 @@ const reducerInitState = {
     winner: false,
 };
 
-function game(state = reducerInitState, {type, payload}) {
+function game(state = reducerInitState, { type, payload }) {
         
     switch (type) {
         case play.type: {
@@ -45,8 +45,13 @@ function game(state = reducerInitState, {type, payload}) {
             };
         }
         case jumpTo.type: {
+
+            const  history = state.history.slice(0, payload.move + 1);
+            const winner = calculateTicTacToeWinner(history[history.length - 1].squares);
             return {
                 ...state,
+                winner,
+                history,
                 stepNumber: payload.move,
                 xIsNext: (payload.move % 2) === 0,
             };
