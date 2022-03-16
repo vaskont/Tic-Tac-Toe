@@ -5,7 +5,7 @@ import {
 } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { reducer, reducerInitState } from 'models/tic-tac-toe';
+import reducer from 'models';
 
 function configureStore(preloadedState) {
   const middlewares = []
@@ -19,7 +19,6 @@ function configureStore(preloadedState) {
   return store
 }
 
-// const store = configureStore(reducerInitState);
 const store = createStore(reducer);
 console.log('Store created!', store.getState());
 export default store;

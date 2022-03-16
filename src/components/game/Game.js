@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
-import React from 'react';
-
-import { connect } from 'react-redux';
+import { React, useState } from 'react';
 
 import { Board } from 'components/board';
 
-import { createStructuredSelector } from 'reselect';
+import { Login_change } from 'components/login_change';
+
+import { Login_start } from 'components/login_start';
 
 import { withProps } from 'libs/model';
 
@@ -15,10 +15,13 @@ import {
     winner,
     history,
     xIsNext,
-    name,
     jumpTo,
-    changeName,
 } from 'models/tic-tac-toe';
+
+import {
+    name,
+    changeName,
+} from 'models/login';
 
 import './game.css';
 
@@ -35,36 +38,39 @@ export const Game = ({ winner, xIsNext, history, name, jumpTo, changeName }) => 
         );
     })
 
+    const { squares: last } = history[history.length - 1];
+    const draw = last.filter(x => x === null);
+
     const status = winner
         ? 'Winner: ' + winner
-        : 'Next player: ' + (xIsNext ? 'X' : 'O');
+        : draw.length
+            ? 'Next player: ' + (xIsNext ? 'X' : 'O')
+            : `It's a draw!`;
 
-    let tempName = '';
-    let target = '';
 
-    function myfunc(t){
-        tempName = t.value;
-        target = t;
+    const [tempName, setTempName] = useState('');
+    const [target, setTarget] = useState('');
+
+    function update(t){
+        setTempName(t.value);
+        setTarget(t);
     }
-
-    function submitF(){
+    
+    function submit(){
         target.value = '';
         changeName({tempName});
     }
 
     const login = name
-        ? <div className='login'>
-            <span>Hello, {name}</span>
-            <input type='text' name='name' size='15' onChange={({ target }) => myfunc(target)}/>
-            <button onClick={submitF} >Change name</button>
-        </div>
-        : <div className='login'>
-            <label>Please enter your name: 
-                <input name='name' id='name' onChange={({ target }) => myfunc(target)}/>
-                <input type='submit' name='button' onClick={submitF} />
-            </label>
-        </div>
-    
+        ? <Login_change 
+            name={name}
+            update={update}
+            submit={submit}
+        />
+        : <Login_start 
+            update={update}
+            submit={submit}
+        />
 
     return (
         <div className="game">
