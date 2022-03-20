@@ -5,14 +5,15 @@ import { React, useState } from 'react';
 
 import { Board } from 'components/board';
 
-import { Login_change } from 'components/login_change';
+import { LoginChange } from 'components/loginChange';
 
-import { Login_start } from 'components/login_start';
+import { LoginStart } from 'components/loginStart';
 
 import { withProps } from 'libs/model';
 
 import {
     winner,
+    draw,
     history,
     xIsNext,
     jumpTo,
@@ -25,7 +26,7 @@ import {
 
 import './game.css';
 
-export const Game = ({ winner, xIsNext, history, name, jumpTo, changeName }) => {
+export const Game = ({ winner, draw, xIsNext, history, name, jumpTo, changeName }) => {
     
     const moves = history.map((step, move) => {
         const desc = move ? 
@@ -38,15 +39,11 @@ export const Game = ({ winner, xIsNext, history, name, jumpTo, changeName }) => 
         );
     })
 
-    const { squares: last } = history[history.length - 1];
-    const draw = last.filter(x => x === null);
-
     const status = winner
         ? 'Winner: ' + winner
-        : draw.length
-            ? 'Next player: ' + (xIsNext ? 'X' : 'O')
-            : `It's a draw!`;
-
+        : draw
+            ? `It's a draw!`
+            : 'Next player: ' + (xIsNext ? 'X' : 'O');
 
     const [tempName, setTempName] = useState('');
     const [target, setTarget] = useState('');
@@ -62,12 +59,12 @@ export const Game = ({ winner, xIsNext, history, name, jumpTo, changeName }) => 
     }
 
     const login = name
-        ? <Login_change 
+        ? <LoginChange 
             name={name}
             update={update}
             submit={submit}
         />
-        : <Login_start 
+        : <LoginStart 
             update={update}
             submit={submit}
         />
@@ -90,6 +87,7 @@ export const Game = ({ winner, xIsNext, history, name, jumpTo, changeName }) => 
 
 export default withProps({
     winner,
+    draw,
     history,
     xIsNext,
     name,
@@ -99,40 +97,3 @@ export default withProps({
         changeName,
     },
 )(Game);
-
-// export default withProps(
-//     {
-//         winner,
-//         history,
-//         xIsNext,
-//     },
-//     {
-//         jumpTo,
-//     },
-// )(Game);
-
-
-// const mapStateToProps = (state) => {
-//     return {
-//         winner: winner(state),
-//         history: history(state),
-//         xIsNext : xIsNext(state),
-//     };
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         jumpTo: (move) => dispatch( jumpTo({move}) ),
-//     };
-// };
-
-// export default connect(mapStateToProps, { jumpTo })(Game);
-
-// export default connect( 
-//     createStructuredSelector({
-//         winner,
-//         history,
-//         xIsNext,
-//     }),
-//     { jumpTo },
-// )(Game);

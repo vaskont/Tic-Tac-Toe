@@ -5,7 +5,7 @@ import {
 } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import reducer from 'models';
+import reducer from 'models/reducer';
 
 function configureStore(preloadedState) {
   const middlewares = []

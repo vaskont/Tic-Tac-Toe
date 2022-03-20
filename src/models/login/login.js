@@ -5,7 +5,6 @@ const reducerInitState = {
 };
 
 function login(state = reducerInitState, {type, payload}) {
-        
     switch (type) {
         case changeName.type: {
             return {

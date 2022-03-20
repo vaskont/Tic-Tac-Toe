@@ -2,10 +2,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 
-//import { withProps } from 'libs/model';
-
-import { createSelector } from 'reselect';
-
 import {
     square,
     play,
@@ -15,37 +11,14 @@ import { connect } from 'react-redux';
 
 import './square.css';
 
-export const Square = ({ index, value, play }) => {
-    return (
-        <button className="square" onClick={() => play(index)}>
-            {value}
-        </button>
-    );
-}
+export const Square = ({ index: i, value, play }) => (
+    <button className="square" onClick={() => play({ i })}>
+        {value}
+    </button>
+);
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        value: square(state)(ownProps.index)
-    };
-};
+const mapStateToProps = (state, ownProps) => ({
+    value: square(state)(ownProps.index)
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        play: i => dispatch(play({ i })),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Square);
-
-// export default withProps(
-//     {
-//         value: (state, props) => square(state)(props.index),
-//     },
-//     {
-//         play,
-//     },
-// )(Square);
-
-// const mapStateToProps = createSelector(square, (value) => ({
-//     value,
-// }));
+export default connect(mapStateToProps, { play })(Square);

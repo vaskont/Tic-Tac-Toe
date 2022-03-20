@@ -13,6 +13,7 @@ const reducerInitState = {
     stepNumber: 0,
     xIsNext: true,
     winner: false,
+    draw: false,
 };
 
 function game(state = reducerInitState, { type, payload }) {
@@ -34,9 +35,13 @@ function game(state = reducerInitState, { type, payload }) {
             
             squares[i] = state.xIsNext ? 'X' : 'O';
 
+            const nulls = squares.filter(x => x === null);
+            const draw = nulls.length ? false : true;
+
             return {
                 ...state,
                 winner: calculateTicTacToeWinner(squares),
+                draw,
                 history: history.concat([
                     { squares }
                 ]),
@@ -46,11 +51,18 @@ function game(state = reducerInitState, { type, payload }) {
         }
         case jumpTo.type: {
 
-            const  history = state.history.slice(0, payload.move + 1);
+            const history = state.history.slice(0, payload.move + 1);
             const winner = calculateTicTacToeWinner(history[history.length - 1].squares);
+            const current = history[history.length - 1];
+            const squares = current.squares.slice();
+
+            const nulls = squares.filter(x => x === null);
+            const draw = nulls.length ? false : true;
+
             return {
                 ...state,
                 winner,
+                draw,
                 history,
                 stepNumber: payload.move,
                 xIsNext: (payload.move % 2) === 0,
