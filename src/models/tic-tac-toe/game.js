@@ -36,7 +36,7 @@ function game(state = reducerInitState, { type, payload }) {
             squares[i] = state.xIsNext ? 'X' : 'O';
 
             const nulls = squares.filter(x => x === null);
-            const draw = nulls.length ? false : true;
+            const draw = nulls.length === 0;
 
             return {
                 ...state,
@@ -57,7 +57,7 @@ function game(state = reducerInitState, { type, payload }) {
             const squares = current.squares.slice();
 
             const nulls = squares.filter(x => x === null);
-            const draw = nulls.length ? false : true;
+            const draw = nulls.length === 0;
 
             return {
                 ...state,
