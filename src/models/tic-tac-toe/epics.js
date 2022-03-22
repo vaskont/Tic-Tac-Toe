@@ -15,8 +15,6 @@ const playEpic = (action$, state$) => action$.pipe(
     ofType(play.type),
     map(({ payload: { i } }) => {
         const { game: state } = state$.value;
-        console.log('state:', state);
-        console.log('states history: ', state.history);
         const history = state.history.slice(0, state.stepNumber + 1);
         const current = history[history.length - 1];
         const squares = current.squares.slice();
