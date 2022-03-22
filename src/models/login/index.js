@@ -1,4 +1,4 @@
-export { login } from './login';
+export { reducerLogin } from './reducer';
 
 export {
     name,
@@ -7,3 +7,5 @@ export {
 export { 
     changeName,
 } from './actions';
+
+export { changeNameEpic } from './epics'
