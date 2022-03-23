@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
+import axios from 'axios';
+
 import { React, useState } from 'react';
 
 import { Board } from 'components/board';
@@ -56,6 +58,20 @@ export const Game = ({ winner, draw, xIsNext, history, name, jumpTo, changeName 
     function submit(){
         target.value = '';
         changeName({tempName});
+
+        const name = 'vassilis';
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(name)
+        };
+
+        fetch('http://localhost:8080/', options)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.log(error)
+        });
     }
 
     const login = name

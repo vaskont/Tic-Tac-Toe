@@ -1,6 +1,6 @@
 import { ofType } from "redux-observable";
 
-import { map } from "rxjs/operators" ;
+import { map } from "rxjs/operators";
 
 import calculateTicTacToeWinner from "libs/tic-tac-toe";
 
