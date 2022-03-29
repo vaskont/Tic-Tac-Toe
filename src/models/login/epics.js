@@ -1,19 +1,32 @@
 import { ofType } from "redux-observable";
 
-import { map } from "rxjs/operators";
+import { mergeMap } from "rxjs/operators";
 
 import {
-    changeName,
-    changeNameSuccess,
+    login,
+    loginSuccess,
+    loginFail,
 } from "./actions";
 
-const changeNameEpic = action$ => action$.pipe(
-    ofType(changeName.type),
-    map(({ payload }) => {
-        return changeNameSuccess({
-            name: payload.tempName,
-        });
+const loginEpic = action$ => action$.pipe(
+    ofType(login.type),
+    mergeMap(({ payload }) => {
+        const { name } = payload;
+
+        fetch(`http://localhost:8080/login?username=${name}`)
+        .then(async response => {
+            console.log('Success: ');
+            let json = await response.json();
+
+            return (
+                json.loginSuccess
+                    ? loginSuccess({
+                            name,
+                        })
+                    : loginFail()
+            );
+        }); 
     }),
 );
 
-export { changeNameEpic };
+export { loginEpic };

@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
-import axios from 'axios';
-
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 import { Board } from 'components/board';
 
@@ -23,13 +21,16 @@ import {
 
 import {
     name,
-    changeName,
+    login,
 } from 'models/login';
 
 import './game.css';
 
-export const Game = ({ winner, draw, xIsNext, history, name, jumpTo, changeName }) => {
+export const Game = ({ winner, draw, xIsNext, history, name, jumpTo, login }) => {
     
+    const [tempName, setTempName] = useState('');
+    const [target, setTarget] = useState('');
+
     const moves = history.map((step, move) => {
         const desc = move ? 
             'Go to move #' + move :
@@ -47,9 +48,6 @@ export const Game = ({ winner, draw, xIsNext, history, name, jumpTo, changeName 
             ? `It's a draw!`
             : 'Next player: ' + (xIsNext ? 'X' : 'O');
 
-    const [tempName, setTempName] = useState('');
-    const [target, setTarget] = useState('');
-
     function update(t){
         setTempName(t.value);
         setTarget(t);
@@ -57,24 +55,10 @@ export const Game = ({ winner, draw, xIsNext, history, name, jumpTo, changeName 
     
     function submit(){
         target.value = '';
-        changeName({tempName});
-
-        const name = 'vassilis';
-        const options = {
-            method: 'POST',
-            body: JSON.stringify(name)
-        };
-
-        fetch('http://localhost:8080/', options)
-        .then(response => {
-            console.log(response);
-        })
-        .catch(error => {
-            console.log(error)
-        });
+        login({tempName});
     }
 
-    const login = name
+    const loginView = name
         ? <LoginChange 
             name={name}
             update={update}
@@ -95,7 +79,7 @@ export const Game = ({ winner, draw, xIsNext, history, name, jumpTo, changeName 
                 <ol>{moves}</ol>
             </div>
             <div>
-                {login}
+                {loginView}
             </div>
         </div>
     );
@@ -110,6 +94,6 @@ export default withProps({
     },
     { 
         jumpTo,
-        changeName,
+        login,
     },
 )(Game);

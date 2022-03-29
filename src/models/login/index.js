@@ -5,7 +5,7 @@ export {
 } from './selectors';
 
 export { 
-    changeName,
+    login,
 } from './actions';
 
-export { changeNameEpic } from './epics'
+export { loginEpic } from './epics'

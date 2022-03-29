@@ -1,9 +1,11 @@
 import { Action } from 'libs/model';
 
-const changeName = Action('CHANGE_NAME');
-const changeNameSuccess = Action('CHANGE_NAME_SUCCESS');
+const login = Action('LOGIN');
+const loginSuccess = Action('LOGIN_SUCCESS');
+const loginFail = Action('LOGIN_FAIL');
 
 export {
-    changeName,
-    changeNameSuccess,
+    login,
+    loginSuccess,
+    loginFail,
 };
