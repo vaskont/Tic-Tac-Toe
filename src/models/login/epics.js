@@ -13,13 +13,14 @@ const loginEpic = action$ => action$.pipe(
     mergeMap(({ payload }) => {
         const { name } = payload;
 
-        fetch(`http://localhost:8080/login?username=${name}`)
+        return fetch(`http://localhost:8080/login?username=${name}`)
         .then(async response => {
             console.log('Success: ');
             let json = await response.json();
-
+            console.log('json: ', json);
+            console.log('name', name);
             return (
-                json.loginSuccess
+                json.loginResult
                     ? loginSuccess({
                             name,
                         })

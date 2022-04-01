@@ -10,6 +10,8 @@ const reducerInitState = {
 function reducerLogin(state = reducerInitState, {type, payload}) {
     switch (type) {
         case loginSuccess.type: {
+            console.log('inside loginSuccess!');
+            console.log(payload);
             return {
                 ...state,
                 ...payload,
