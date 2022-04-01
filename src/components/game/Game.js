@@ -55,7 +55,7 @@ export const Game = ({ winner, draw, xIsNext, history, name, jumpTo, login }) =>
     
     function submit(){
         target.value = '';
-        login({tempName});
+        login({tempName}); //kanonika prepei na valw sto state ena prop login, kai an ginei fail, na thesw to tempname se ''.
     }
 
     const loginView = name
