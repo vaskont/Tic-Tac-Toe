@@ -5,6 +5,7 @@ import {
 
 const reducerInitState = {
     name: '',
+    status: '',
 };
 
 function reducerLogin(state = reducerInitState, {type, payload}) {
@@ -16,7 +17,10 @@ function reducerLogin(state = reducerInitState, {type, payload}) {
             };
         }
         case loginFail.type: {
-            return state;
+            return {
+                ...state,
+                ...payload,
+            };
         }
         default:
             return state;

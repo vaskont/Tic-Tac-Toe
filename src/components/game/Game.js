@@ -21,12 +21,13 @@ import {
 
 import {
     name,
+    status,
     login,
 } from 'models/login';
 
 import './game.css';
 
-export const Game = ({ winner, draw, xIsNext, history, name, jumpTo, login }) => {
+export const Game = ({ winner, draw, xIsNext, history, name, status, jumpTo, login }) => {
     
     const [tempName, setTempName] = useState('');
     const [target, setTarget] = useState('');
@@ -42,7 +43,7 @@ export const Game = ({ winner, draw, xIsNext, history, name, jumpTo, login }) =>
         );
     })
 
-    const status = winner
+    const winStatus = winner
         ? 'Winner: ' + winner
         : draw
             ? `It's a draw!`
@@ -56,6 +57,11 @@ export const Game = ({ winner, draw, xIsNext, history, name, jumpTo, login }) =>
     function submit(){
         target.value = '';
         login({tempName}); //kanonika prepei na valw sto state ena prop login, kai an ginei fail, na thesw to tempname se ''.
+        console.log('status: ', status);
+        if(status === 'fail'){
+            setTempName('');
+        }
+        console.log('tempName: ', tempName);
     }
 
     const loginView = name
@@ -75,7 +81,7 @@ export const Game = ({ winner, draw, xIsNext, history, name, jumpTo, login }) =>
                 <Board />
             </div>
             <div className="game-info">
-                <div>{status}</div>
+                <div>{winStatus}</div>
                 <ol>{moves}</ol>
             </div>
             <div>
@@ -91,6 +97,7 @@ export default withProps({
     history,
     xIsNext,
     name,
+    status,
     },
     { 
         jumpTo,

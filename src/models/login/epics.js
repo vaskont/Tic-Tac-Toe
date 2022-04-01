@@ -16,12 +16,16 @@ const loginEpic = action$ => action$.pipe(
         return fetch(`http://localhost:8080/login?username=${name}`)
         .then(async response => {
             let json = await response.json();
+            console.log(json.loginResult);
             return (
                 json.loginResult
                     ? loginSuccess({
                             name,
+                            status: 'success',
                         })
-                    : loginFail()
+                    : loginFail({
+                        status: 'fail',
+                    })
             );
         }); 
     }),
