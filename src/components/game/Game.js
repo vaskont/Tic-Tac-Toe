@@ -32,6 +32,15 @@ export const Game = ({ winner, draw, xIsNext, history, name, status, jumpTo, log
     const [tempName, setTempName] = useState('');
     const [target, setTarget] = useState('');
 
+    useEffect(
+        () => {
+            if(status === 'fail'){
+                setTempName('');
+            }
+        },
+        [status],
+    );
+
     const moves = history.map((step, move) => {
         const desc = move ? 
             'Go to move #' + move :
@@ -56,12 +65,7 @@ export const Game = ({ winner, draw, xIsNext, history, name, status, jumpTo, log
     
     function submit(){
         target.value = '';
-        login({tempName}); //kanonika prepei na valw sto state ena prop login, kai an ginei fail, na thesw to tempname se ''.
-        console.log('status: ', status);
-        if(status === 'fail'){
-            setTempName('');
-        }
-        console.log('tempName: ', tempName);
+        login({tempName}); 
     }
 
     const loginView = name
