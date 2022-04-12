@@ -8,7 +8,7 @@ import reducer from 'models/reducer';
 
 import { createEpicMiddleware } from 'redux-observable';
 
-import myEpic from 'redux-observable/epic';
+import { epics } from 'models/epics';
 
 const epicMiddleware = createEpicMiddleware();
 
@@ -18,9 +18,9 @@ function configureStore() {
     applyMiddleware(epicMiddleware)
   );
 
-  epicMiddleware.run(myEpic);
+  epicMiddleware.run(epics);
 
-  return store
+  return store;
 }
 
 const store = configureStore();

@@ -1,9 +1,14 @@
-export { login } from './login';
+export { reducerLogin } from './reducer';
 
 export {
     name,
+    status,
 } from './selectors';
 
 export { 
-    changeName,
+    login,
+    loginSuccess,
+    loginFail,
 } from './actions';
+
+export { loginEpic } from './epics'

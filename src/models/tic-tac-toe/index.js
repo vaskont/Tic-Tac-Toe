@@ -1,4 +1,4 @@
-export { game, reducerInitState } from './game';
+export { reducerGame, reducerInitState } from './reducer';
 
 export {
     winner,
@@ -13,3 +13,5 @@ export {
     play,
     jumpTo,
 } from './actions';
+
+export { playEpic, jumpToEpic } from './epics';

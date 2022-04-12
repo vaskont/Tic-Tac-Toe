@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 import { Board } from 'components/board';
 
@@ -21,13 +21,26 @@ import {
 
 import {
     name,
-    changeName,
+    status,
+    login,
 } from 'models/login';
 
 import './game.css';
 
-export const Game = ({ winner, draw, xIsNext, history, name, jumpTo, changeName }) => {
+export const Game = ({ winner, draw, xIsNext, history, name, status, jumpTo, login }) => {
     
+    const [tempName, setTempName] = useState('');
+    const [target, setTarget] = useState('');
+
+    useEffect(
+        () => {
+            if(status === 'fail'){
+                setTempName('');
+            }
+        },
+        [status],
+    );
+
     const moves = history.map((step, move) => {
         const desc = move ? 
             'Go to move #' + move :
@@ -39,14 +52,11 @@ export const Game = ({ winner, draw, xIsNext, history, name, jumpTo, changeName 
         );
     })
 
-    const status = winner
+    const winStatus = winner
         ? 'Winner: ' + winner
         : draw
             ? `It's a draw!`
             : 'Next player: ' + (xIsNext ? 'X' : 'O');
-
-    const [tempName, setTempName] = useState('');
-    const [target, setTarget] = useState('');
 
     function update(t){
         setTempName(t.value);
@@ -55,10 +65,10 @@ export const Game = ({ winner, draw, xIsNext, history, name, jumpTo, changeName 
     
     function submit(){
         target.value = '';
-        changeName({tempName});
+        login({tempName}); 
     }
 
-    const login = name
+    const loginView = name
         ? <LoginChange 
             name={name}
             update={update}
@@ -75,11 +85,11 @@ export const Game = ({ winner, draw, xIsNext, history, name, jumpTo, changeName 
                 <Board />
             </div>
             <div className="game-info">
-                <div>{status}</div>
+                <div>{winStatus}</div>
                 <ol>{moves}</ol>
             </div>
             <div>
-                {login}
+                {loginView}
             </div>
         </div>
     );
@@ -91,9 +101,10 @@ export default withProps({
     history,
     xIsNext,
     name,
+    status,
     },
     { 
         jumpTo,
-        changeName,
+        login,
     },
 )(Game);
