@@ -1,3 +1,4 @@
+import { request } from "models/system";
 import { ofType } from "redux-observable";
 
 import { mergeMap } from "rxjs/operators";
@@ -28,6 +29,20 @@ const loginEpic = action$ => action$.pipe(
                     })
             );
         }); 
+    }),
+);
+
+const loginEpic2 = action$ => action$.pipe(
+    ofType(login.type),
+    mergeMap(({ payload }) => {
+        const { tempName: name } = payload;
+
+        return request({
+            url: `http://localhost:8080/login?username=${name}`,
+            handler: ({ loginResult }) => loginResult 
+                ? loginSuccess({ name, status: "success" })
+                : loginFail({ status: "fail" }),
+        });
     }),
 );
 
