@@ -8,7 +8,7 @@ const reducerInitState = {
     status: '',
 };
 
-function reducerLogin(state = reducerInitState, {type, payload}) {
+function reducerLogin({ type, payload }, state = reducerInitState) {
     switch (type) {
         case loginSuccess.type: {
             return {

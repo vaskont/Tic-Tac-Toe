@@ -15,7 +15,7 @@ const reducerInitState = {
     draw: false,
 };
 
-function reducerGame(state = reducerInitState, { type, payload }) {
+function reducerGame( { type, payload }, state = reducerInitState) {
         
     switch (type) {
         case playSuccess.type: {
