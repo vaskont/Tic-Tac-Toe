@@ -10,12 +10,7 @@ const reducerInitState = {
 
 function reducerLogin({ type, payload }, state = reducerInitState) {
     switch (type) {
-        case loginSuccess.type: {
-            return {
-                ...state,
-                ...payload,
-            };
-        }
+        case loginSuccess.type: 
         case loginFail.type: {
             return {
                 ...state,

@@ -7,7 +7,7 @@ const requestEpic = action$ => action$.pipe(
     mergeMap(({ payload: { url, handler } }) => {
         return fetch(url).then(async response => {
             let json = await response.json();
-            return handler(json);
+            return invoke(handler, json);
         });
     }),
 );
