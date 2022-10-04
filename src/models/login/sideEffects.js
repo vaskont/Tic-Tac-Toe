@@ -14,4 +14,4 @@ register(
         : loginFail({ status: "fail" }),
 );
 
-export {LOGIN_HANDLER};
+export { LOGIN_HANDLER };
